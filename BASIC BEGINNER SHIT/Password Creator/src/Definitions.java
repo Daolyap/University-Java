@@ -1,20 +1,12 @@
 public class Definitions {
-    private String allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVEXYZ0123456789@£$%&!?";
-    private int defaultLength = 12;
+    public String allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVEXYZ0123456789@£$%&!?";
+    public int defaultLength = 12;
 
-    public String getAllowedChars() {
-        return allowedChars;
-    }
-    
-    public int getDefaultLength() {
-        return defaultLength;
-    }
-
-    public void changeAllowedChars(newChars) {
+    public void changeAllowedChars(String newChars) {
         allowedChars = newChars;
     }
 
-    public void changeDefaultLength(newLength) {
+    public void changeDefaultLength(int newLength) {
         defaultLength = newLength;
     }
 }
