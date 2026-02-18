@@ -5,24 +5,29 @@
 import java.util.Scanner;
 
 public class Main {
-    Helper helper = new Helper();
-    static Definitions defs = new Definitions();
+    static Definitions defs = new Definitions(); // Single source of definitions
+    static Helper helper = new Helper(defs); // Pass over definitions
 
     public static void main(String[] args) throws Exception {
-        while (true) {
-            System.out.println();
-            String option = menu();
+        Scanner in = new Scanner(System.in);
 
-            if (option.contains("1")) {
+        while (true) {
+            System.out.println("---Java Password Creation Tool---");
+            System.out.println("1) Quick Create\n2) Custom Create\n3) Compliance Selection \n4) Exit\n-----Please Select an Option-----");
+
+            String selectOption = in.nextLine();
+            System.out.println();
+
+            if (selectOption.contains("1")) {
                 quickCreate();
             }
-            else if (option.contains("2")) {
+            else if (selectOption.contains("2")) {
                 customCreate();
             }
-            else if (option.contains("3")) {
+            else if (selectOption.contains("3")) {
                 complianceCreate();
             }
-            else if (option.contains("4")) {
+            else if (selectOption.contains("4")) {
                 System.exit(67);
             }
             else {
@@ -32,31 +37,15 @@ public class Main {
         }
     }
 
-    public static String menu() throws Exception {
-        Scanner in = new Scanner(System.in);
-
-        System.out.println("---Java Password Creation Tool---");
-        System.out.println("1) Quick Create\n2) Custom Create\n3) Compliance Selection \n4) Exit\n-----Please Select an Option-----");
-
-        String selectOption = in.nextLine();
-        return selectOption;
+    private static void quickCreate() throws Exception {
+        helper.generate(helper.getDefaultLength(), helper.getAllowedChars());
     }
 
-    public static void quickCreate() throws Exception {
-        Helper helper = new Helper();
-
-        System.out.println("Password: " + helper.generate(helper.getDefaultLength(), helper.getAllowedChars()));
+    private static void customCreate() throws Exception {
+        helper.customMenu();
     }
 
-    public static void customCreate() throws Exception {
-        Helper helper = new Helper();
-
-        System.out.println("Password: " + helper.customMenu());
-    }
-
-    public static void complianceCreate() throws Exception {
-        Helper helper = new Helper();
-
-        System.out.println("Password: " + helper.complianceMenu());
+    private static void complianceCreate() throws Exception {
+        helper.complianceMenu();
     }
 }
